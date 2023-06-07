@@ -24,4 +24,67 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  height: 100%;
+  background-color: #fff;
+}
+
+.time-slot {
+  position: absolute;
+  color: #717171;
+  font-size: 10px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.timeslots-container {
+  position: relative;
+  height: 720px;
+  width: 55px;
+}
+
+.events-container {
+  position: relative;
+  top: 8px;
+  height: 720px;
+  width: 600px;
+  padding: 0 10px;
+  background-color: #ececec;
+}
+
+.events-container {
+  position: relative;
+  top: 8px;
+  height: 720px;
+  width: 600px;
+  padding: 0 10px;
+  background-color: #ececec;
+}
+
+.event-container {
+  position: relative;
+}
+
+.event {
+  position: absolute;
+  background-color: #fff;
+  color: #fff;
+  border: 1px solid #ccc;
+  display: flex;
+}
+
+.event-item {
+  color: blue;
+}
+
+.event-location {
+  color: grey;
+}
+
+.event-event {
+  color: green;
 }
