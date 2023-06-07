@@ -12,35 +12,41 @@ export default function CalendarTimeSlots() {
 
     for (let i = 9; i <= 21; i++) {
       let hour = i;
-      let ampm = "AM";
+      let ampm = "am";
 
       if (hour > 12) {
         hour -= 12;
-        ampm = "PM";
+        ampm = "pm";
       }
 
-      slots.push({ time: `${hour}:00${ampm}` });
+      slots.push({
+        time: `${hour}:00`,
+        isHalfHour: false,
+        label: ampm,
+      });
 
       if (i !== 21) {
         // Skip adding 9:30 PM
-        slots.push({ time: `${hour}:30` });
+        slots.push({ time: `${hour}:30`, isHalfHour: true });
       }
     }
 
     setTimeSlots(slots);
   }, []);
 
-  return (
-    <div className="timeslots-container">
-      {timeSlots.map((slot, index) => (
-        <div
-          key={index}
-          className="time-slot"
-          style={{ top: `${index * 30}px` }} // Adjust for half hour slots
-        >
-          <p>{slot.time}</p>
-        </div>
-      ))}
-    </div>
-  );
+  function renderTimeSlots() {
+    return timeSlots.map((slot, index) => (
+      <div
+        key={index}
+        className="time-slot"
+        style={{ top: `${index * 30}px` }} // Adjust for half hour slots
+      >
+        <p className={`${slot.isHalfHour ? "half-hour" : ""}`}>
+          {slot.time} <span>{slot.label}</span>
+        </p>
+      </div>
+    ));
+  }
+
+  return <div className="timeslots-container">{renderTimeSlots()}</div>;
 }
