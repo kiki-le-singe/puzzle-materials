@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import { CalendarEventsData, sortCalendarEvents } from "@/data/CalendarEvent";
 import { CalendarEvent } from "@/data/types";
+import { hasEventCollision } from "@/utils/events";
 
 export default function CalendarEvents() {
   const [events, setEvents] = useState<CalendarEvent[]>(CalendarEventsData);
@@ -23,40 +24,29 @@ export default function CalendarEvents() {
     };
   }, []);
 
-  return (
-    <div className="events-container">
-      {events.map((event, index) => {
-        return (
-          <div key={index} className="event-container">
-            <div
-              className="event"
-              style={{
-                top: `${event.start}px`,
-                height: `${event.end - event.start}px`,
-                width: `${
-                  events.filter(
-                    (e) => e.start < event.end && e.end > event.start
-                  ).length > 1
-                    ? "50%"
-                    : "100%"
-                }`,
-                left: `${
-                  events.filter(
-                    (e) => e.start < event.end && e.end > event.start
-                  ).length > 1 && index % 2 === 0
-                    ? "50%"
-                    : 0
-                }`,
-                zIndex: index,
-              }}
-            >
-              <p className="event-item">Sample item</p>
-              <p className="event-location">Sample location</p>
-              <p className="event-event">Event {index + 1}</p>
-            </div>
+  function renderEvents() {
+    return events.map((event, index) => {
+      const _hasEventCollision = hasEventCollision(events, event);
+
+      return (
+        <div key={index} className="event-container">
+          <div
+            className="event"
+            style={{
+              top: `${event.start}px`,
+              height: `${event.end - event.start}px`,
+              width: `${_hasEventCollision ? "50%" : "100%"}`,
+              left: `${_hasEventCollision && index % 2 === 0 ? "50%" : 0}`,
+              zIndex: index,
+            }}
+          >
+            <p className="event-item">Sample item</p>
+            <p className="event-location">Sample location</p>
           </div>
-        );
-      })}
-    </div>
-  );
+        </div>
+      );
+    });
+  }
+
+  return <div className="events-container">{renderEvents()}</div>;
 }
