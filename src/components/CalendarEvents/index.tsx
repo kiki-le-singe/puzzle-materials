@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import { CalendarEventsData, sortCalendarEvents } from "@/data/CalendarEvent";
 import { CalendarEvent } from "@/data/types";
-import { hasEventCollision } from "@/utils/events";
+import Event from "./components/Event";
 
 export default function CalendarEvents() {
   const [events, setEvents] = useState<CalendarEvent[]>(CalendarEventsData);
@@ -53,27 +53,14 @@ export default function CalendarEvents() {
   }, []);
 
   function renderEvents() {
-    return events.map((event, index) => {
-      const _hasEventCollision = hasEventCollision(events, event);
-
-      return (
-        <div key={index} className="relative">
-          <div
-            className="flex flex-col absolute box-border border-l-4 border-l-blue p-1 font-medium bg-white border border-solid	border-grey"
-            style={{
-              top: `${event.start}px`,
-              height: `${event.end - event.start}px`,
-              width: `${_hasEventCollision ? "50%" : "100%"}`,
-              left: `${_hasEventCollision && index % 2 === 0 ? "50%" : 0}`,
-              zIndex: index,
-            }}
-          >
-            <p className="text-blue text-xs">Sample item</p>
-            <p className="text-grey text-xxs">Sample location</p>
-          </div>
-        </div>
-      );
-    });
+    return events.map((event, index) => (
+      <Event
+        key={`Event_${index}`}
+        events={events}
+        event={event}
+        index={index}
+      />
+    ));
   }
 
   return (
