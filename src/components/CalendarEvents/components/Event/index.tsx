@@ -5,7 +5,7 @@ export default function Event({ events, event, index }: EventProps) {
   const _hasEventCollision = hasEventCollision(events, event);
 
   return (
-    <div key={index} className="relative">
+    <div className="relative">
       <div
         className="flex flex-col absolute box-border border-l-4 border-l-blue p-1 font-medium bg-white border border-solid	border-grey"
         style={{
