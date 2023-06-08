@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { CalendarTimeSlot } from "@/data/types";
+import Slot from "./components/Slot";
 
 export default function CalendarTimeSlots() {
   const [timeSlots, setTimeSlots] = useState<CalendarTimeSlot[]>([]);
@@ -36,18 +37,7 @@ export default function CalendarTimeSlots() {
 
   function renderTimeSlots() {
     return timeSlots.map((slot, index) => (
-      <div
-        key={index}
-        className="flex justify-end absolute text-xs font-bold w-full text-black"
-        style={{ top: `${index * 30}px` }} // Adjust for half hour slots
-      >
-        <p className={`${slot.isHalfHour ? "text-dark-grey text-xxs" : ""}`}>
-          {slot.time}{" "}
-          <span className="uppercase text-dark-grey text-xxs">
-            {slot.label}
-          </span>
-        </p>
-      </div>
+      <Slot key={`Slot_${index}`} slot={slot} index={index} />
     ));
   }
 
