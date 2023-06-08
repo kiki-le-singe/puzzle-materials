@@ -46,13 +46,8 @@ export default function CalendarEvents() {
 
   // Allow to put layOutDay in the global namespace.
   // To change the state of the events, you can call the layOutDay function like that in the browser's console:
-  // - layOutDay.call(null, []);
-  // - layOutDay.call(null, [{ start: 30, end: 150 }, { start: 540, end: 600 }]);
-  // ...
-  // or with Function.prototype.apply()
-  // - layOutDay.apply(null, [[]]);
-  // - layOutDay.apply(null, [[{ start: 30, end: 150 }, { start: 540, end: 600 }]]);
-  // ...
+  // - layOutDay([]);
+  // - layOutDay([{ start: 30, end: 150 }, { start: 540, end: 600 }]);
   useEffect(() => {
     globalThis.layOutDay = layOutDay;
   }, []);
