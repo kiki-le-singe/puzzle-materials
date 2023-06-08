@@ -3,7 +3,7 @@ import CalendarTimeSlots from "@/components/CalendarTimeSlots";
 
 export default function Home() {
   return (
-    <div className="calendar">
+    <div className="flex bg-white h-full">
       <CalendarTimeSlots />
       <CalendarEvents />
     </div>

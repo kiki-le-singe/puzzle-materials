@@ -57,9 +57,9 @@ export default function CalendarEvents() {
       const _hasEventCollision = hasEventCollision(events, event);
 
       return (
-        <div key={index} className="event-container">
+        <div key={index} className="relative">
           <div
-            className="event"
+            className="flex flex-col absolute box-border border-l-4 border-l-blue p-1 font-medium bg-white border border-solid	border-grey"
             style={{
               top: `${event.start}px`,
               height: `${event.end - event.start}px`,
@@ -68,13 +68,17 @@ export default function CalendarEvents() {
               zIndex: index,
             }}
           >
-            <p className="event-item">Sample item</p>
-            <p className="event-location">Sample location</p>
+            <p className="text-blue text-xs">Sample item</p>
+            <p className="text-grey text-xxs">Sample location</p>
           </div>
         </div>
       );
     });
   }
 
-  return <div className="events-container">{renderEvents()}</div>;
+  return (
+    <div className="events-container relative top-2 py-0 px-2.5 w-[37.5rem] h-[45rem] bg-light-grey">
+      {renderEvents()}
+    </div>
+  );
 }

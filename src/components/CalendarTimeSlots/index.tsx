@@ -38,15 +38,20 @@ export default function CalendarTimeSlots() {
     return timeSlots.map((slot, index) => (
       <div
         key={index}
-        className="time-slot"
+        className="flex justify-end absolute text-xs font-bold w-full text-black"
         style={{ top: `${index * 30}px` }} // Adjust for half hour slots
       >
-        <p className={`${slot.isHalfHour ? "half-hour" : ""}`}>
-          {slot.time} <span>{slot.label}</span>
+        <p className={`${slot.isHalfHour ? "text-dark-grey text-xxs" : ""}`}>
+          {slot.time}{" "}
+          <span className="uppercase text-dark-grey text-xxs">
+            {slot.label}
+          </span>
         </p>
       </div>
     ));
   }
 
-  return <div className="timeslots-container">{renderTimeSlots()}</div>;
+  return (
+    <div className="relative w-14 mr-2.5 h-[45rem]">{renderTimeSlots()}</div>
+  );
 }
